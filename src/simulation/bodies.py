@@ -10,18 +10,31 @@ class CelestialBody():
             name: str, 
             mass: float,
             radius: float,
-            pos: np.array,
-            vel: np.array):
+            pos: np.array, # (x,y)
+            vel: np.array = np.array([0, 0], dtype=np.float32), # (vx, vy)
+            ac: np.array = np.array([0, 0],dtype=np.float32) # (ax,ay)
+            ):
         self.name = name
         self.mass = mass
         self.radius = radius 
         self.pos = pos
         self.vel = vel
+        self.ac = ac
+
+    def update_ac(self, new_ac: np.array):
+        """ Updates the body acceleration
+            the new vel is obtained by the rk4 solution"""
+        self.ac = new_ac
 
     def update_vel(self, new_vel: np.array):
         """ Updates the body velocity
             the new vel is obtained by the rk4 solution"""
         self.vel = new_vel
+
+    def update_pos(self, new_pos: np.array):
+        """ Updates the body position
+            the new vel is obtained by the rk4 solution"""
+        self.pos = new_pos
 
 class CelestialSystem():
     """ Composition of CelestialBody's """
@@ -29,8 +42,8 @@ class CelestialSystem():
     def __init__(
             self,
             name: str,
-            bodies: list,
-            time: float):
+            bodies: list = [],
+            time: float = 0):
         self.name = name
         self.bodies = bodies
         self.time = time
@@ -53,3 +66,7 @@ class CelestialSystem():
         for x in self.bodies:
             if x.name == body_name:
                 self.bodies.remove(x)
+
+
+if __name__ == "__main__":
+    pass
