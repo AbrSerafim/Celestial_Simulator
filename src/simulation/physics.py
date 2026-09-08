@@ -3,8 +3,7 @@
 import numpy as np
 from scipy.integrate import solve_ivp
 
-import bodies
-from debug import plot_rk_debug
+import simulation.bodies as bodies
 
 # F = m a = GMm/|r|^3 r
 
@@ -157,28 +156,39 @@ class Simulation():
     Render system 
 """
 
-"""
-sys = bodies.CelestialSystem(name="sys")
 
-sys.add_body(
-    name="A",
-    mass=1e10,
-    radius=1,
-    pos = [0,-1],
-    vel = [0,0]
-)
+if __name__ == "__main__":
 
-sys.add_body(
-    name="B",
-    mass=1e10,
-    radius=1,
-    pos = [1,1],
-    vel = [0,0]
-)
+    sys = bodies.CelestialSystem(name="sys")
 
-sim = Simulation(debug=True)
+    sys.add_body(
+        name="A",
+        mass=1e10,
+        radius=1,
+        pos=[-1, -1],
+        vel=[.70711/2, -.70711/2]
+    )
 
-plot_rk_debug(
-    debug_states=sim.debug_states,
-    num_bodies=len(sys.bodies)
-)"""
+    sys.add_body(
+        name="B",
+        mass=1e10,
+        radius=1,
+        pos=[1, 1],
+        vel=[-.70711/2, .70711/2]
+    )
+
+    sys.add_body(
+        name="C",
+        mass=1e10,
+        radius=1,
+        pos=[2.5,2.5],
+        vel=[0,0]
+    )    
+
+    sim = Simulation(debug=True)
+
+    from gui.dynamic_gui import DynamicGui
+
+    gui = DynamicGui(system=sys,
+                     simulation=sim)
+    gui.show()

@@ -1,1 +1,0 @@
-""" Code to handle the dynamical elements of the simulation (celestial system) """

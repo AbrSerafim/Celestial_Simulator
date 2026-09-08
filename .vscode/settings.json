@@ -38,5 +38,14 @@
         "visualization",
         "xlabel",
         "ylabel"
-    ]
+    ],
+
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/src"
+    ],
+
+    "terminal.integrated.env.windows": {
+        "PYTHONPATH": "${workspaceFolder}\\src"
+    }
+
 }
