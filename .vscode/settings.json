@@ -46,6 +46,7 @@
 
     "terminal.integrated.env.windows": {
         "PYTHONPATH": "${workspaceFolder}\\src"
-    }
+    },
+    "git.ignoreLimitWarning": true
 
 }
