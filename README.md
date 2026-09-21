@@ -19,17 +19,19 @@ git clone https://github.com/AbrSerafim/Celestial_Simulator
 ```
 
 ### 2. Setup
-#### If using powershell first allow it to run scripts with; the script will automatically download python 3.9.13, create a venv and install all requirements into it (Requires Microsoft App Installer)
+#### If using powershell first allow it to run scripts with
 
 ```bash
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
-#### Then
+#### Then run 
 
 ```bash
 .\setup.ps1
 ```
-#### Else setup python mannually then run
+#### The script will automatically download python 3.9.13, create a venv and install all requirements into it (Requires Microsoft App Installer)
+
+#### Else setup python 3.9 manually then run
 ```bash
-pip install -r requirements.tx
+pip install -r requirements.txt
 ```
