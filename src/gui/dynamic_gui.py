@@ -102,3 +102,7 @@ class DynamicGui:
         self.plot.show() 
         self.start()
         self.app.exec()
+
+
+if __name__ == "__main__":
+    pass

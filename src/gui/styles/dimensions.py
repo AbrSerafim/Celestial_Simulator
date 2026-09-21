@@ -1,0 +1,9 @@
+"""GUI dimensions and spacing."""
+
+PANEL_WIDTH_MIN = 280
+PANEL_WIDTH_MAX = 350
+
+MARGIN = 10
+SPACING = 8
+
+BUTTON_HEIGHT = 32
