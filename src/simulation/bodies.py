@@ -46,6 +46,7 @@ class CelestialSystem():
         self.name = name
         self.bodies = bodies
         self.time = np.float64(time)
+        
         if (history == None) and (time_history == None):
             self.history = np.empty((0, 0), dtype=np.float64)
             self.time_history = np.empty(0, dtype=np.float64)

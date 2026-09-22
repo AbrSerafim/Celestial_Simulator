@@ -29,7 +29,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```bash
 .\setup.ps1
 ```
-#### The script will automatically download python 3.9.13, create a venv and install all requirements into it (Requires Microsoft App Installer)
+#### The script will automatically download python 3.9.13, create a venv and install all requirements into it (Requires Microsoft App Installer: https://apps.microsoft.com/detail/9nblggh4nns1?hl=pt-BR&gl=BR)
 
 #### Else setup python 3.9 manually then run
 ```bash

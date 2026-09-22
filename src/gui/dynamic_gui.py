@@ -1,10 +1,6 @@
 """ Code to handle the dynamical elements of the simulation (celestial system) """
 
-import sys
-
-import numpy as np
 import pyqtgraph as pg
-from PySide6.QtWidgets import QApplication
 from PySide6.QtCore import QTimer
 
 import simulation.bodies as bodies
@@ -18,11 +14,6 @@ class DynamicGui:
 
         self.system = system
         self.simulation = simulation
-
-        # Create Qt Application
-        self.app = QApplication.instance()
-        if self.app is None:
-            self.app = QApplication(sys.argv)
 
         # -----------------------------------
         # Create plot
@@ -96,12 +87,6 @@ class DynamicGui:
     def stop(self):
         """ Stop simulation loop """
         self.timer.stop()
-
-    def show(self): # Equivalent to a while loop using event 
-        """ Display GUI """
-        self.plot.show() 
-        self.start()
-        self.app.exec()
 
 
 if __name__ == "__main__":
