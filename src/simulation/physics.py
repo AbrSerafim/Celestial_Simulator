@@ -135,8 +135,13 @@ class Simulation():
 
         final_state = solution.y[:, -1]
 
+        accelerations = self._acceleration(state=final_state,system=system)
+
         # Updates system i-1 -> i
         self._update_system(system=system, state=final_state)
+
+        for body,acceleration in zip(system.bodies, accelerations):
+            body.update_ac(acceleration)
 
         # Saves state i onto system
         system._record_state(final_state)
