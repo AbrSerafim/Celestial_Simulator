@@ -39,12 +39,12 @@ class CelestialSystem():
     def __init__(
             self,
             name: str,
-            bodies: list = [],
+            bodies: list = None,
             time: np.float64 = 0,
             time_history: np.array = None,
             history: np.array = None):
         self.name = name
-        self.bodies = bodies
+        self.bodies = [] if bodies is None else bodies
         self.time = np.float64(time)
         
         if (history == None) and (time_history == None):

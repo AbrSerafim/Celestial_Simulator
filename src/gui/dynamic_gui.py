@@ -1,5 +1,6 @@
 """ Code to handle the dynamical elements of the simulation (celestial system) """
 
+import numpy as np
 import pyqtgraph as pg
 from PySide6.QtCore import QTimer
 
@@ -10,10 +11,15 @@ import simulation.physics as physics
 class DynamicGui:
     """ Handles the simulation visualization """
 
-    def __init__(self, system: bodies.CelestialSystem, simulation: physics.Simulation):
+    def __init__(self,
+                 system: bodies.CelestialSystem,
+                 simulation: physics.Simulation,
+                 update_callback=None):
 
         self.system = system
         self.simulation = simulation
+
+        self.update_callback = update_callback
 
         # -----------------------------------
         # Create plot
@@ -42,7 +48,7 @@ class DynamicGui:
         # Timer controls the simulation loop
         # -----------------------------------
         self.timer = QTimer()
-        self.timer.timeout.connect(self._step)
+        self.timer.timeout.connect(self.step)
 
     def _create_body_items(self):
         """ Create a graphical item for every celestial body """
@@ -58,7 +64,7 @@ class DynamicGui:
             self.plot.addItem(item)
             self.body_items.append(item)
 
-    def _step(self):
+    def step(self):
         """ Advance simulation and update visualization """
 
         # Physics
@@ -66,6 +72,10 @@ class DynamicGui:
 
         # Visualization
         self.update()
+
+        # Static GUI
+        if self.update_callback is not None:
+            self.update_callback()
 
     def update(self):
         """ Update graphical posistions from the system """
@@ -87,6 +97,49 @@ class DynamicGui:
     def stop(self):
         """ Stop simulation loop """
         self.timer.stop()
+
+    def add_body(
+            self,
+            name: str,
+            mass: float,
+            radius: float,
+            pos: np.array,
+            vel: np.array
+    ):
+        """ Add a body to the simulation and visualization """
+
+        # Add body to simulation
+        self.system.add_body(
+            name=name,
+            mass=mass,
+            radius=radius,
+            pos=pos,
+            vel=vel
+        )
+
+        # Fetches newly created body
+        body = self.system.bodies[-1]
+
+        # Create graphical representation
+        item = pg.ScatterPlotItem(
+            x=[body.pos[0]],
+            y=[body.pos[1]],
+            size=10
+        )
+
+        self.plot.addItem(item)
+        self.body_items.append(item)
+
+    def remove_body(self, body_name: str):
+        """ Remove a body from the simulation and visualization """
+
+        for i, body in enumerate(self.system.bodies):
+            if body.name == body_name:
+
+                self.plot.removeItem(self.body_items.pop(i)) # Vis
+                self.system.remove_body(body_name) # Sim
+
+                break
 
 
 if __name__ == "__main__":

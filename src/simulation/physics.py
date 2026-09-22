@@ -145,50 +145,6 @@ class Simulation():
 
         return solution
 
-""" For simulation loop
-
-    sim = Simulation()
-
-    while running:
-        
-        simulation.step(system)
-
-    Render system 
-"""
-
 
 if __name__ == "__main__":
-
-    sys = bodies.CelestialSystem(name="sys")
-
-    sys.add_body(
-        name="A",
-        mass=1e10,
-        radius=1,
-        pos=[-1, -1],
-        vel=[.70711/2, -.70711/2]
-    )
-
-    sys.add_body(
-        name="B",
-        mass=1e10,
-        radius=1,
-        pos=[1, 1],
-        vel=[-.70711/2, .70711/2]
-    )
-
-    sys.add_body(
-        name="C",
-        mass=1e10,
-        radius=1,
-        pos=[2.5,2.5],
-        vel=[0,0]
-    )    
-
-    sim = Simulation(debug=True)
-
-    from gui.dynamic_gui import DynamicGui
-
-    gui = DynamicGui(system=sys,
-                     simulation=sim)
-    gui.show()
+    pass
