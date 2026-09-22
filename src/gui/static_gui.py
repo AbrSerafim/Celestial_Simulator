@@ -4,14 +4,13 @@ from PySide6.QtWidgets import(
     QWidget,
     QVBoxLayout,
     QHBoxLayout,
-    QSizePolicy,
     QPushButton,
     QGroupBox,
     QLabel,
     QLineEdit,
-    QDoubleSpinBox,
     QComboBox
 )
+from PySide6.QtCore import Qt
 from PySide6.QtGui import QDoubleValidator
 
 import simulation.bodies as bodies
@@ -208,7 +207,7 @@ class StaticGui(QWidget):
         kinematics_layout = QHBoxLayout()
 
         pos_info = QVBoxLayout()
-        pos_info.addWidget(QLabel("Postion"))
+        pos_info.addWidget(QLabel("Position"))
         pos_info.addWidget(self.x_label)
         pos_info.addWidget(self.y_label)
 
@@ -225,6 +224,8 @@ class StaticGui(QWidget):
         kinematics_layout.addLayout(pos_info)
         kinematics_layout.addLayout(vel_info)
         kinematics_layout.addLayout(ac_info)
+
+        #kinematics_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.kinematics_group.setLayout(kinematics_layout)
 
