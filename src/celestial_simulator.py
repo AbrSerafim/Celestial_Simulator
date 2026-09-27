@@ -16,7 +16,7 @@ class Controller:
 
         self.app = QApplication(sys.argv)
 
-        self.system = bodies.CelestialSystem(name="test")
+        self.system = bodies.CelestialSystem(name="Simulador Celeste")
         self.simulation = physics.Simulation()
 
         self.main_window = MainWindow(

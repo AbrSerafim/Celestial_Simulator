@@ -58,7 +58,7 @@ class DynamicGui:
             item = pg.ScatterPlotItem(
                 x=[body.pos[0]],
                 y=[body.pos[1]],
-                size=10
+                size=body.radius
             )
 
             self.plot.addItem(item)
@@ -124,7 +124,7 @@ class DynamicGui:
         item = pg.ScatterPlotItem(
             x=[body.pos[0]],
             y=[body.pos[1]],
-            size=10
+            size=body.radius
         )
 
         self.plot.addItem(item)

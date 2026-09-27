@@ -14,19 +14,12 @@ class Simulation():
                  G=6.6743e-11, #m^3*kg^-1*s^-2
                  STEP=15e-3, #s
                  history: np.array = None,
-                 time_history: np.array = None,
-                 debug: bool = False
+                 time_history: np.array = None
                 ):
         self.G = np.float64(G)
         self.STEP = np.float64(STEP)
         self.history = history
         self.time_history = time_history
-
-        self.debug = debug
-        self.debug_states = []
-
-    def clear_debug(self):
-        self.debug_states.clear()
 
     def _get_state(self, system: bodies.CelestialSystem) -> np.array:
         """ Convert the system's bodies configuration into a single state vector """
@@ -93,12 +86,6 @@ class Simulation():
                     state: np.array,
                     system: bodies.CelestialSystem):
         """ Defines the callable for the IVP solver """
-
-        if self.debug: # Save actual state for debug
-            self.debug_states.append({
-                "time": t,
-                "state": state.copy()
-            })
 
         acceleration = self._acceleration(state=state, system=system)
 

@@ -2,9 +2,9 @@
 
 <div align="center">
 
-<img src="docs/Simulador_Celeste.jpg" width="80%" >
+<img src="docs/Simulador_Celeste.png" width="80%" >
 
-*Celestial Simulator Interface Ideation*
+*Celestial Simulator Interface*
 
 ----- The project runs on python 3.9.x -----
 
