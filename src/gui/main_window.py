@@ -105,14 +105,14 @@ class MainWindow(QMainWindow):
 
         name = self.static_gui.name_input.text()
 
-        mass = float(self.static_gui.mass_input.text().replace(",","."))
-        radius = float(self.static_gui.radius_input.text().replace(",","."))
+        mass = float(self.static_gui.mass_input.text().replace(",",".").replace(".","."))
+        radius = float(self.static_gui.radius_input.text().replace(",",".").replace(".","."))
 
-        x = float(self.static_gui.x_input.text().replace(",","."))
-        y = float(self.static_gui.y_input.text().replace(",","."))
+        x = float(self.static_gui.x_input.text().replace(",",".").replace(".","."))
+        y = float(self.static_gui.y_input.text().replace(",",".").replace(".","."))
 
-        vx = float(self.static_gui.vx_input.text().replace(",","."))
-        vy = float(self.static_gui.vy_input.text().replace(",","."))
+        vx = float(self.static_gui.vx_input.text().replace(",",".").replace(".","."))
+        vy = float(self.static_gui.vy_input.text().replace(",",".").replace(".","."))
 
         pos = np.array([x, y], dtype=np.float64)
         vel = np.array([vx, vy], dtype=np.float64)
