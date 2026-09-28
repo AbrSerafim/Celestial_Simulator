@@ -16,17 +16,6 @@ from PySide6.QtGui import QDoubleValidator
 import simulation.bodies as bodies
 import simulation.physics as physics
 
-def create_number_input(value):
-    input_box = QLineEdit()
-
-    validator = QDoubleValidator()
-    validator.setNotation(QDoubleValidator.Notation.ScientificNotation)
-
-    input_box.setValidator(validator)
-    input_box.setText(f"{value:g}")
-
-    return input_box
-
 class StaticGui(QWidget):
     """ Handles the static controls and info of the GUI """
 
@@ -41,6 +30,18 @@ class StaticGui(QWidget):
 
         self._create_widgets()
         self._create_layout()
+
+    def create_number_input(self, value):
+        """ Deals with scientific notation like inputs """
+        input_box = QLineEdit()
+
+        validator = QDoubleValidator()
+        validator.setNotation(QDoubleValidator.Notation.ScientificNotation)
+
+        input_box.setValidator(validator)
+        input_box.setText(f"{value:g}")
+
+        return input_box
 
     def _create_widgets(self):
         """ Create the GUI widgets """
@@ -59,14 +60,14 @@ class StaticGui(QWidget):
 
         self.name_input = QLineEdit()
 
-        self.mass_input = create_number_input(1e10)
-        self.radius_input = create_number_input(1e1)
+        self.mass_input = self.create_number_input(1e10)
+        self.radius_input = self.create_number_input(1e1)
 
-        self.x_input = create_number_input(0.0)
-        self.y_input = create_number_input(0.0)      
+        self.x_input = self.create_number_input(0.0)
+        self.y_input = self.create_number_input(0.0)      
 
-        self.vx_input = create_number_input(0.0)
-        self.vy_input = create_number_input(0.0)
+        self.vx_input = self.create_number_input(0.0)
+        self.vy_input = self.create_number_input(0.0)
 
         self.add_button = QPushButton("Add Body")
 

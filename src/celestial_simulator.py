@@ -3,6 +3,7 @@
 import sys
 
 from PySide6.QtWidgets import QApplication
+from pathlib import Path
 
 from gui.main_window import MainWindow
 
@@ -15,6 +16,17 @@ class Controller:
     def __init__(self):
 
         self.app = QApplication(sys.argv)
+
+        # Load stylesheet
+        stylesheet_path = (
+            Path(__file__).parent
+            / "gui"
+            / "styles"
+            / "dark.qss"
+        )
+
+        with open(stylesheet_path, "r", encoding="utf-8") as file:
+            self.app.setStyleSheet(file.read())
 
         self.system = bodies.CelestialSystem(name="Simulador Celeste")
         self.simulation = physics.Simulation()
