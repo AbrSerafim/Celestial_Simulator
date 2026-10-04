@@ -5,7 +5,8 @@ from PySide6.QtWidgets import (
     QMainWindow,
     QWidget,
     QHBoxLayout,
-    QVBoxLayout
+    QVBoxLayout,
+    QInputDialog
 )
 
 from gui.dynamic_gui import DynamicGui
@@ -13,6 +14,8 @@ from gui.static_gui import StaticGui
 
 import simulation.bodies as bodies
 import simulation.physics as physics
+
+from database.database import Database
 
 class MainWindow(QMainWindow):
     """ Main window """
@@ -22,6 +25,7 @@ class MainWindow(QMainWindow):
 
         self.system = system
         self.simulation = simulation
+        self.database = Database()
 
         self._create_gui()
         self._create_layout()
@@ -79,6 +83,10 @@ class MainWindow(QMainWindow):
             self.step_simulation
         )
 
+        self.static_gui.save_button.clicked.connect(
+            self.save_system
+        )
+
         self.static_gui.add_button.clicked.connect(
             self.add_body
         )
@@ -99,6 +107,32 @@ class MainWindow(QMainWindow):
         """ Advance the simulation by one step """
         self.dynamic_gui.step()
         self.static_gui.update_information()
+
+    def save_system(self):
+        """ Save the current system state to the database """
+
+        system_name, accepted = QInputDialog.getText(
+            self,
+            "Save System",
+            "System name:"
+        )
+
+        if not accepted:
+            return 
+
+        system_name = system_name.strip()
+
+        if not system_name:
+            return
+
+        # Update system name
+        self.system.name = system_name
+
+        # Update windows title
+        self.setWindowTitle(system_name)
+
+        # Save to database
+        self.database.save_system(self.system)
 
     def add_body(self):
         """ Add a body to the simulation """

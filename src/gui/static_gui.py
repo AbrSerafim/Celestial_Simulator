@@ -53,6 +53,7 @@ class StaticGui(QWidget):
         self.start_button = QPushButton("Start")
         self.pause_button = QPushButton("Pause")
         self.step_button = QPushButton("Step")
+        self.save_button = QPushButton("Save System")
 
         # -----------------------------------------------------
         # Add body
@@ -106,11 +107,15 @@ class StaticGui(QWidget):
         # -----------------------------------------------------
 
         simulation_group = QGroupBox("Simulation")
-        simulation_layout = QHBoxLayout()
+        simulation_layout_main = QHBoxLayout()
+        simulation_layout = QVBoxLayout()
 
-        simulation_layout.addWidget(self.start_button)
-        simulation_layout.addWidget(self.pause_button)
-        simulation_layout.addWidget(self.step_button)
+        simulation_layout_main.addWidget(self.start_button)
+        simulation_layout_main.addWidget(self.pause_button)
+        simulation_layout_main.addWidget(self.step_button)
+
+        simulation_layout.addLayout(simulation_layout_main)
+        simulation_layout.addWidget(self.save_button)
 
         simulation_group.setLayout(simulation_layout)
 

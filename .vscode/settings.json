@@ -1,45 +1,4 @@
 {
-    "cSpell.words": [
-        "acceleration",
-        "accelerations",
-        "Adds",
-        "bodies",
-        "Calculates",
-        "calculations",
-        "celestial",
-        "Composition",
-        "Defines",
-        "derivative",
-        "dynamical",
-        "Erases",
-        "evaluated",
-        "figure",
-        "Handles",
-        "integrate",
-        "kutta",
-        "legend",
-        "mass",
-        "norm",
-        "numerical",
-        "obtained",
-        "onto",
-        "qualify",
-        "rtol",
-        "runge",
-        "Saves",
-        "singular",
-        "solve",
-        "solver",
-        "span",
-        "times",
-        "Trajectory",
-        "vector",
-        "velocity",
-        "visualization",
-        "xlabel",
-        "ylabel"
-    ],
-
     "python.analysis.extraPaths": [
         "${workspaceFolder}/src"
     ],
@@ -47,6 +6,6 @@
     "terminal.integrated.env.windows": {
         "PYTHONPATH": "${workspaceFolder}\\src"
     },
+    
     "git.ignoreLimitWarning": true
-
 }

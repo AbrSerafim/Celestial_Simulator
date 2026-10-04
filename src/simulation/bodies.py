@@ -38,7 +38,7 @@ class CelestialSystem():
 
     def __init__(
             self,
-            name: str,
+            name: str = "",
             bodies: list = None,
             time: np.float64 = 0,
             time_history: np.array = None,
