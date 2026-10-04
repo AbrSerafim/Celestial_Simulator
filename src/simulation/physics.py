@@ -81,6 +81,22 @@ class Simulation():
 
         return accelerations
 
+    def update_accelerations(self, system: bodies.CelestialSystem):
+        """ Recalculate accelerations for the current state (used for loading system) """
+
+        state = self._get_state(system)
+
+        acceleration = self._acceleration(
+            state=state,
+            system=system
+        )
+
+        for body, acceleration in zip(
+            system.bodies,
+            acceleration
+        ):
+            body.update_ac(acceleration)
+
     def _derivative(self,
                     t,
                     state: np.array,

@@ -87,6 +87,10 @@ class MainWindow(QMainWindow):
             self.save_system
         )
 
+        self.static_gui.load_button.clicked.connect(
+            self.load_system
+        )
+
         self.static_gui.add_button.clicked.connect(
             self.add_body
         )
@@ -133,6 +137,70 @@ class MainWindow(QMainWindow):
 
         # Save to database
         self.database.save_system(self.system)
+
+    def load_system(self):
+        """ Load a saved system from the database """
+
+        systems = self.database.get_systems()
+
+        if not systems:
+            return
+
+        system_name = [
+            system[1]
+            for system in systems
+        ]
+
+        selected_name, accepted = QInputDialog.getItem(
+            self,
+            "Load System",
+            "Select a system:",
+            system_name,
+            0,
+            False
+        )
+
+        if not accepted:
+            return
+
+        # Find selected system ID
+        selected_id = None
+
+        for system in systems:
+            if system[1] == selected_name:
+                selected_id = system[0]
+                break
+
+        if selected_id is None:
+            return
+
+        # Load system from database
+        loaded_system = self.database.load_system(
+            selected_id
+        )
+
+        if self.load_system is None:
+            return
+
+        # Stop current simulation
+        self.dynamic_gui.stop()
+
+        # Replace system
+        self.system = loaded_system
+
+        # Replace system used by static GUI
+        self.static_gui.system = loaded_system
+
+        # Rebuild dynamic GUI
+        self.dynamic_gui.reload_system(loaded_system)
+        self.simulation.update_accelerations(loaded_system)
+
+        # Update GUI
+        self.static_gui.update_body_selector()
+        self.static_gui.update_information()
+
+        # Update window titles
+        self.setWindowTitle(loaded_system.name)
 
     def add_body(self):
         """ Add a body to the simulation """

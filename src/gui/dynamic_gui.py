@@ -141,6 +141,22 @@ class DynamicGui:
 
                 break
 
+    def reload_system(self, system: bodies.CelestialSystem):
+        """ Replace the current system and rebuild the visualization """
+
+        self.system = system
+
+        # Remove old graphical items
+        for item in self.body_items:
+            self.plot.removeItem(item)
+
+        self.body_items.clear()
+
+        # Create graphical items for the new system
+        self._create_body_items()
+
+        # Update plot title
+        self.plot.setWindowTitle(system.name)
 
 if __name__ == "__main__":
     pass

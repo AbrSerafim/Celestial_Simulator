@@ -2,6 +2,7 @@
 
 import sqlite3
 from pathlib import Path
+import numpy as np
 
 import simulation.bodies as bodies
 
@@ -109,3 +110,85 @@ class Database:
                 )
 
         return system_id
+
+    def get_systems(self):
+        """ Return all saved systems """
+
+        with self._connect() as connection:
+
+            cursor = connection.execute(
+                """
+                SELECT id, name, time
+                FROM systems
+                ORDER BY id
+                """
+            )
+
+            return cursor.fetchall()
+
+    def load_system(self, system_id):
+        """ Load a system and all of its bodies """
+
+        with self._connect() as connection:
+
+            system_data = connection.execute(
+                """
+                SELECT name, time
+                FROM systems
+                WHERE id = ?
+                """,
+                (system_id,)
+            ).fetchone()
+
+            if system_data is None:
+                return None
+
+            system_name, time = system_data
+
+            body_data = connection.execute(
+                """
+                SELECT name, mass, radius, x, y, vx, vy
+                FROM bodies
+                WHERE system_id = ?
+                ORDER BY id
+                """,
+                (system_id,)
+            ).fetchall()
+
+        loaded_bodies = []
+
+        for (
+            name,
+            mass,
+            radius,
+            x,
+            y,
+            vx,
+            vy
+        ) in body_data:
+
+            pos = np.array(
+                [x, y],
+                dtype=np.float64
+            )
+
+            vel = np.array(
+                [vx, vy],
+                dtype=np.float64
+            )
+
+            loaded_bodies.append(
+                bodies.CelestialBody(
+                    name=name,
+                    mass=mass,
+                    radius=radius,
+                    pos=pos,
+                    vel=vel
+                )
+            )
+
+        return bodies.CelestialSystem(
+            name=system_name,
+            bodies=loaded_bodies,
+            time=np.float64(time)
+        )

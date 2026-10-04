@@ -54,6 +54,7 @@ class StaticGui(QWidget):
         self.pause_button = QPushButton("Pause")
         self.step_button = QPushButton("Step")
         self.save_button = QPushButton("Save System")
+        self.load_button = QPushButton("Load System")
 
         # -----------------------------------------------------
         # Add body
@@ -116,6 +117,7 @@ class StaticGui(QWidget):
 
         simulation_layout.addLayout(simulation_layout_main)
         simulation_layout.addWidget(self.save_button)
+        simulation_layout.addWidget(self.load_button)
 
         simulation_group.setLayout(simulation_layout)
 
