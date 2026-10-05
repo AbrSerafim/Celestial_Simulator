@@ -8,7 +8,7 @@ import simulation.bodies as bodies
 import simulation.physics as physics
 
 
-class DynamicGui:
+class DynamicGui():
     """ Handles the simulation visualization """
 
     def __init__(self,

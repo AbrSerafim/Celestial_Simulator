@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img src="docs/Simulador_Celeste.png" width="80%" >
+<img src="docs/Simulador_Celeste_Final.png" width="80%" >
 
 *Celestial Simulator Interface*
 
