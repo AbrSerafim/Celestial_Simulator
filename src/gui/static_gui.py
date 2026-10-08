@@ -10,7 +10,6 @@ from PySide6.QtWidgets import(
     QLineEdit,
     QComboBox
 )
-from PySide6.QtCore import Qt
 from PySide6.QtGui import QDoubleValidator
 
 import simulation.bodies as bodies
