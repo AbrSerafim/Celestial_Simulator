@@ -1,5 +1,7 @@
 """ Handles SQLite database operations for saved celestial systems """
 
+import sys
+
 import sqlite3
 from pathlib import Path
 import numpy as np
@@ -7,7 +9,10 @@ import numpy as np
 import simulation.bodies as bodies
 
 # Database location
-DATABASE_PATH = Path(__file__).resolve().parents[2] / "data" / "celestial.db"
+if getattr(sys, "frozen", False):
+    DATABASE_PATH = Path(sys._MEIPASS) / "data" / "celestial.db"
+else:
+    DATABASE_PATH = Path(__file__).resolve().parents[2] / "data" / "celestial.db"
 
 class Database:
     """ Handle the celestial systems database """
